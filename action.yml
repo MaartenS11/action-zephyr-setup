@@ -60,7 +60,7 @@ runs:
     - name: Initialize
       shell: bash
       run: |
-        west init -l ${{ inputs.app-path }} --mf ${{ inputs.manifest-file-name }}
+        west init -l ${{ inputs.app-path }} 
         west update -o=--depth=1 -n
 
     - name: Environment setup
