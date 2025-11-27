@@ -112,18 +112,19 @@ runs:
       shell: bash
       run: |
         set -vx
-        python3 -m venv ${{ inputs.base-path }}/zephyrproject/.venv
-        source ${{ inputs.base-path }}/zephyrproject/.venv/bin/activate
-        west init ${{ inputs.base-path }}/zephyrproject
-        cd ${{ inputs.base-path }}/zephyrproject
+        python3 -m venv ~/zephyrproject/.venv
+        source ~/zephyrproject/.venv/bin/activate
+        west init ~/zephyrproject
+        cd ~/zephyrproject
         west update -o=--depth=1 -n  
         west zephyr-export
         west packages pip --install --ignore-venv-check
         cd zephyr
         west sdk install
-        cd ${{ inputs.base-path }}/platforms/Zephyr
-        source ${{ inputs.base-path }}/zephyrproject/.venv/bin/activate
-        source ${{ inputs.base-path }}/zephyrproject/zephyr/zephyr-env.sh
+
+        #cd ${{ inputs.base-path }}/platforms/Zephyr
+        #source /zephyrproject/.venv/bin/activate
+        #source ${{ inputs.base-path }}/zephyrproject/zephyr/zephyr-env.sh
         #todo build wasm binary
         west build -b esp32_devkitc_wroom/esp32/procpu
     - name: Build project
@@ -133,7 +134,7 @@ runs:
       run: |
         #cd WARduino/platforms/Zephyr
         cd platforms/Zephyr
-        source ${{ inputs.base-path }}/zephyrproject/.venv/bin/activate
-        source ${{ inputs.base-path }}/zephyrproject/zephyr/zephyr-env.sh
+        source ~/zephyrproject/.venv/bin/activate
+        source ~/zephyrproject/zephyr/zephyr-env.sh
         #todo build wasm binary
         west build -b esp32_devkitc_wroom/esp32/procpu
